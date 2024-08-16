@@ -1,0 +1,77 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="mariannactx (generated)" id="1723832145372-1">
+        <createTable tableName="candidates">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="candidatesPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mariannactx (generated)" id="1723832145372-2">
+        <createTable tableName="roles">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rolesPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mariannactx (generated)" id="1723832145372-3">
+        <createTable tableName="sessions">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="sessionsPK"/>
+            </column>
+            <column name="status" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mariannactx (generated)" id="1723832145372-4">
+        <createTable tableName="voters">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="votersPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mariannactx (generated)" id="1723832145372-5">
+        <createTable tableName="votes">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="votesPK"/>
+            </column>
+            <column name="candidate_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="session_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="voter_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="mariannactx (generated)" id="1723832145372-6">
+        <addForeignKeyConstraint baseColumnNames="voter_id" baseTableName="votes" constraintName="FK3a07btyqw3mrq53f1lcprhtod" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="voters" validate="true"/>
+    </changeSet>
+    <changeSet author="mariannactx (generated)" id="1723832145372-7">
+        <addForeignKeyConstraint baseColumnNames="candidate_id" baseTableName="votes" constraintName="FKgr0htccc82fco8rhtkxcuct4g" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="candidates" validate="true"/>
+    </changeSet>
+    <changeSet author="mariannactx (generated)" id="1723832145372-8">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="sessions" constraintName="FKkh2g75dl7vs5pd92pw1dc9yhr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="roles" validate="true"/>
+    </changeSet>
+    <changeSet author="mariannactx (generated)" id="1723832145372-9">
+        <addForeignKeyConstraint baseColumnNames="session_id" baseTableName="votes" constraintName="FKl0x9u7v2jc893vxceqj2nqk90" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="sessions" validate="true"/>
+    </changeSet>
+    <changeSet author="mariannactx (generated)" id="1723832145372-10">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="candidates" constraintName="FKleyh51ex79s6lht76pkky6k5x" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="roles" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

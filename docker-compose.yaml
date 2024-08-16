@@ -1,0 +1,37 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres-docker
+      - POSTGRES_DB=eleicao
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./data/postgres:/data/postgres
+      # - ./config/init-postgres.sql:/docker-entrypoint-initdb.d/init-postgres.sql
+    networks:
+      - postgres-network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -d postgres']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@eleicao.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin-docker
+    ports:
+      - '5433:80'
+    depends_on:
+      - postgres
+    volumes:
+      - ./config/init-pgadmin-servers.json:/pgadmin4/servers.json
+    networks:
+      - postgres-network
+networks:
+  postgres-network:
+    driver: bridge
