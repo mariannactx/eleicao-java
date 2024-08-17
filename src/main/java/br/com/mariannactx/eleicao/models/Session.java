@@ -23,11 +23,24 @@ public class Session {
 
   @NotBlank
   @Column(nullable = false)
-  private int status;
+  private int status = 1;
 
+  @NotBlank
   @ManyToOne
   @JoinColumn(name="role_id", referencedColumnName = "id", nullable = false)
   private Role role;
 
+  public Session() {}
+  
+  public Session(Long role_id) {
+    Role role = new Role();
+    role.setId(role_id);
+
+    this.role = role;
+  }
+
+  public void close() {
+    this.status = 0;
+  }
 
 }

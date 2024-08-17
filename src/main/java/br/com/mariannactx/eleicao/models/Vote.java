@@ -1,6 +1,5 @@
 package br.com.mariannactx.eleicao.models;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,18 +21,18 @@ public class Vote {
   private Long id;
   
   @NotBlank
-  @ManyToOne(targetEntity = Voter.class)
+  @ManyToOne
   @JoinColumn(name="voter_id", referencedColumnName = "id", nullable = false)
-  private Long voter_id;
+  private Voter voter;
 
   @NotBlank
-  @ManyToOne(targetEntity = Candidate.class)
+  @ManyToOne
   @JoinColumn(name="candidate_id", referencedColumnName = "id", nullable = false)
-  private Long candidate_id;
+  private Candidate candidate;
 
   @NotBlank
-  @ManyToOne(targetEntity = Session.class)
+  @ManyToOne
   @JoinColumn(name="session_id", referencedColumnName = "id", nullable = false)
-  private Long session_id;
+  private Session session;
 
 }

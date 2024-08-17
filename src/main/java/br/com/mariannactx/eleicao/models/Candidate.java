@@ -1,5 +1,8 @@
 package br.com.mariannactx.eleicao.models;
 
+import org.springframework.beans.BeanUtils;
+
+import br.com.mariannactx.eleicao.dtos.CandidateDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,8 +28,29 @@ public class Candidate {
   @Column(nullable = false)
   private String name;
 
+  @NotBlank
   @ManyToOne
   @JoinColumn(name="role_id", referencedColumnName = "id", nullable = false)
-  @NotBlank
   private Role role;
+  
+  public Candidate() {}
+  
+  public Candidate(String name, Long role_id) {
+    this.name = name;
+    
+    Role role = new Role();
+    role.setId(role_id);
+
+    this.role = role;
+  }
+
+  public void copyProperties(CandidateDTO data) {
+    BeanUtils.copyProperties(data, this);
+
+    Role role = new Role();
+    role.setId(data.role_id());
+
+    this.role = role;
+
+  }
 }
