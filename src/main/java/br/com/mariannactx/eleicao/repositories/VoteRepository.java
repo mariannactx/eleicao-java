@@ -11,13 +11,9 @@ import br.com.mariannactx.eleicao.models.Vote;
 
 public interface VoteRepository extends ListCrudRepository<Vote, Long> {
   
-  // @Query(value = """
-  // SELECT
-  // new br.com.mariannactx.eleicao.models.BulletinCandidate(v.candidate.id, v.candidate.name, count(v))
-  // FROM Vote v
-  // WHERE v.session.id = :session_id
-  // GROUP BY v.candidate.id"""
-  // )
+  public boolean existsByVoter_id(Long voter_id);
+
+  public boolean existsByCandidate_id(Long candidate_id);
 
   @Query(value = """
     SELECT
@@ -28,7 +24,8 @@ public interface VoteRepository extends ListCrudRepository<Vote, Long> {
       )
     FROM Vote v
     WHERE v.session.id = :session_id
-    GROUP BY v.candidate.id, v.candidate.name"""
+    GROUP BY v.candidate.id, v.candidate.name
+    ORDER BY count(v) DESC"""
   )
   public List<BulletinCandidate> findBySessionGroupedByCandidate(Long session_id);
 }
