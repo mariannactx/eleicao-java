@@ -27,6 +27,10 @@ public class SessionService {
     return sessionRepository.save(session);
   }
 
+  public Optional<Session> findById(Long id) {
+    return sessionRepository.findById(id);
+  }
+
   public List<Session> list() {
     return sessionRepository.findAll();
   }

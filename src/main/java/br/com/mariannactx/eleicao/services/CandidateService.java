@@ -2,13 +2,11 @@ package br.com.mariannactx.eleicao.services;
 
 import br.com.mariannactx.eleicao.dtos.CandidateDTO;
 import br.com.mariannactx.eleicao.models.Candidate;
-import br.com.mariannactx.eleicao.models.Role;
 import br.com.mariannactx.eleicao.repositories.CandidateRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service

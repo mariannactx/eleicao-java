@@ -9,4 +9,7 @@ public interface SessionRepository extends ListCrudRepository<Session, Long> {
   
   @Query(value = "SELECT new java.lang.Boolean(count(s) > 0) FROM Session s WHERE s.role.id = :role_id AND status = 1")
   boolean existsByStatusOpenByRole_id(Long role_id);
+  
+  @Query(value = "SELECT new java.lang.Boolean(count(s) > 0) FROM Session s WHERE s.id = :id AND status = 1")
+  boolean isOpenById(Long id);
 }

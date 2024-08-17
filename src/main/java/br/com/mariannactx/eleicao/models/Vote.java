@@ -35,4 +35,18 @@ public class Vote {
   @JoinColumn(name="session_id", referencedColumnName = "id", nullable = false)
   private Session session;
 
+  public Vote(Long voter_id, Long candidate_id, Long session_id){
+    Voter voter = new Voter();
+    voter.setId(voter_id);
+
+    Candidate candidate = new Candidate();
+    candidate.setId(candidate_id);
+
+    Session session = new Session();
+    session.setId(session_id);
+
+    this.voter = voter;
+    this.candidate = candidate;
+    this.session = session;
+  }
 }
